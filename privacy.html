@@ -11,36 +11,21 @@
 
 <style>
 :root {
-  --navy: #0A1628;
-  --blue: #1E6FFF;
-  --blue-hover: #1458D4;
-  --gold: #C9A84C;
-  --gold-light: #E5C76B;
-  --bg: #080F1E;
-  --bg-2: #0E1A2F;
-  --bg-card: rgba(255,255,255,0.04);
-  --bg-card-hover: rgba(255,255,255,0.07);
-  --border: rgba(255,255,255,0.08);
-  --border-blue: rgba(30,111,255,0.25);
-  --text-1: #F0F4FF;
-  --text-2: #8A9FCC;
-  --text-3: #5A6E96;
-  --surface-blue: rgba(30,111,255,0.08);
-  --surface-gold: rgba(201,168,76,0.1);
+  --navy: #0A1628; --blue: #1E6FFF; --blue-hover: #1458D4;
+  --gold: #C9A84C; --gold-light: #E5C76B;
+  --bg: #080F1E; --bg-2: #0E1A2F;
+  --bg-card: rgba(255,255,255,0.04); --bg-card-hover: rgba(255,255,255,0.07);
+  --border: rgba(255,255,255,0.08); --border-blue: rgba(30,111,255,0.25);
+  --text-1: #F0F4FF; --text-2: #8A9FCC; --text-3: #5A6E96;
+  --surface-blue: rgba(30,111,255,0.08); --surface-gold: rgba(201,168,76,0.1);
   --shadow: rgba(0,0,0,0.4);
 }
 [data-theme="light"] {
-  --bg: #F5F7FD;
-  --bg-2: #EAEEF8;
-  --bg-card: #FFFFFF;
-  --bg-card-hover: #F8FAFF;
-  --border: rgba(10,22,40,0.1);
-  --border-blue: rgba(30,111,255,0.2);
-  --text-1: #0A1628;
-  --text-2: #4A5E82;
-  --text-3: #8A9FCC;
-  --surface-blue: rgba(30,111,255,0.06);
-  --surface-gold: rgba(201,168,76,0.08);
+  --bg: #F5F7FD; --bg-2: #EAEEF8;
+  --bg-card: #FFFFFF; --bg-card-hover: #F8FAFF;
+  --border: rgba(10,22,40,0.1); --border-blue: rgba(30,111,255,0.2);
+  --text-1: #0A1628; --text-2: #4A5E82; --text-3: #8A9FCC;
+  --surface-blue: rgba(30,111,255,0.06); --surface-gold: rgba(201,168,76,0.08);
   --shadow: rgba(10,22,40,0.12);
 }
 
@@ -49,8 +34,8 @@ html { scroll-behavior: smooth; font-size: 16px; }
 body { font-family: 'Plus Jakarta Sans', system-ui, sans-serif; background: var(--bg); color: var(--text-1); transition: background 0.3s, color 0.3s; -webkit-font-smoothing: antialiased; }
 a { text-decoration: none; color: inherit; }
 
-/* NAV */
-nav {
+/* SITE NAV — scoped to .site-nav to avoid polluting <nav> used in TOC */
+.site-nav {
   position: fixed; top: 0; left: 0; right: 0; z-index: 200;
   display: flex; align-items: center; justify-content: space-between;
   padding: 0 40px; height: 64px;
@@ -58,7 +43,7 @@ nav {
   border-bottom: 1px solid var(--border);
   transition: background 0.3s, border-color 0.3s;
 }
-[data-theme="light"] nav { background: rgba(245,247,253,0.88); }
+[data-theme="light"] .site-nav { background: rgba(245,247,253,0.88); }
 .nav-logo { font-family: 'Fraunces', serif; font-weight: 700; font-size: 1.5rem; letter-spacing: -0.02em; color: var(--text-1); }
 .nav-logo em { font-style: normal; color: var(--gold); }
 .nav-right { display: flex; align-items: center; gap: 16px; }
@@ -69,17 +54,13 @@ nav {
   font-size: 1rem; transition: background 0.2s, border-color 0.2s;
 }
 .theme-toggle:hover { background: var(--bg-card-hover); border-color: var(--border-blue); }
-.sun-icon { display: none; }
-.moon-icon { display: block; }
-[data-theme="light"] .sun-icon { display: block; }
-[data-theme="light"] .moon-icon { display: none; }
+.sun-icon { display: none; } .moon-icon { display: block; }
+[data-theme="light"] .sun-icon { display: block; } [data-theme="light"] .moon-icon { display: none; }
 .nav-cta {
-  display: flex; align-items: center; gap: 6px;
-  background: var(--blue); color: #fff;
-  padding: 9px 22px; border-radius: 8px;
-  font-size: 0.875rem; font-weight: 600;
+  display: inline-flex; align-items: center; gap: 6px;
+  background: var(--blue); color: #fff; padding: 9px 22px; border-radius: 8px;
+  font-size: 0.875rem; font-weight: 600; white-space: nowrap;
   transition: background 0.2s, transform 0.2s, box-shadow 0.2s;
-  white-space: nowrap;
 }
 .nav-cta:hover { background: var(--blue-hover); transform: translateY(-1px); box-shadow: 0 6px 20px rgba(30,111,255,0.35); }
 
@@ -99,24 +80,18 @@ nav {
 .legal-title {
   font-family: 'Fraunces', serif; font-weight: 700;
   font-size: clamp(2rem, 4vw, 3rem); line-height: 1.12;
-  letter-spacing: -0.025em; color: var(--text-1);
-  margin-bottom: 16px;
+  letter-spacing: -0.025em; color: var(--text-1); margin-bottom: 16px;
 }
 .legal-title .accent { color: var(--blue); font-style: italic; }
-
-.legal-meta {
-  font-size: 0.85rem; color: var(--text-3);
-  margin-bottom: 16px;
-}
+.legal-meta { font-size: 0.85rem; color: var(--text-3); margin-bottom: 16px; }
 .legal-effective {
   font-size: 0.85rem; color: var(--text-2);
-  margin-bottom: 48px; padding-bottom: 24px;
-  border-bottom: 1px solid var(--border);
+  margin-bottom: 48px; padding-bottom: 24px; border-bottom: 1px solid var(--border);
 }
 .legal-effective strong { color: var(--text-1); }
 
-/* TOC — single column, no overflow */
-.toc {
+/* TOC — plain block, no position interference */
+.toc-block {
   background: var(--bg-card); border: 1px solid var(--border);
   border-radius: 14px; padding: 24px 28px; margin-bottom: 56px;
 }
@@ -124,123 +99,70 @@ nav {
   font-size: 0.72rem; font-weight: 700; letter-spacing: 0.1em;
   text-transform: uppercase; color: var(--blue); margin-bottom: 16px;
 }
-.toc ol {
+.toc-list {
   list-style: none; counter-reset: toc-counter;
   display: flex; flex-direction: column; gap: 8px;
 }
-.toc ol li {
+.toc-list li {
   counter-increment: toc-counter;
   font-size: 0.88rem; color: var(--text-2);
-  padding-left: 28px; position: relative;
-  line-height: 1.5;
+  padding-left: 28px; position: relative; line-height: 1.5;
 }
-.toc ol li::before {
+.toc-list li::before {
   content: counter(toc-counter, decimal-leading-zero);
   position: absolute; left: 0;
-  font-family: 'Fraunces', serif; font-weight: 700;
-  color: var(--blue); font-size: 0.85rem;
+  font-family: 'Fraunces', serif; font-weight: 700; color: var(--blue); font-size: 0.85rem;
 }
-.toc ol li a { transition: color 0.2s; }
-.toc ol li a:hover { color: var(--blue); }
+.toc-list li a { transition: color 0.2s; }
+.toc-list li a:hover { color: var(--blue); }
 
 /* SECTIONS */
-.legal-section {
-  margin-bottom: 48px; scroll-margin-top: 90px;
-}
+.legal-section { margin-bottom: 48px; scroll-margin-top: 90px; }
 .legal-section h2 {
-  font-family: 'Fraunces', serif;
-  font-size: 1.5rem; font-weight: 700;
-  color: var(--text-1); margin-bottom: 20px;
-  letter-spacing: -0.015em;
+  font-family: 'Fraunces', serif; font-size: 1.5rem; font-weight: 700;
+  color: var(--text-1); margin-bottom: 20px; letter-spacing: -0.015em;
   display: flex; align-items: baseline; gap: 16px;
 }
 .legal-section h2 .num {
   font-size: 0.85rem; color: var(--blue); font-weight: 600;
-  font-family: 'Plus Jakarta Sans', sans-serif;
-  letter-spacing: 0.08em;
+  font-family: 'Plus Jakarta Sans', sans-serif; letter-spacing: 0.08em;
 }
-.legal-section h3 {
-  font-size: 1rem; font-weight: 700;
-  color: var(--text-1); margin-top: 20px; margin-bottom: 10px;
-}
-.legal-section p {
-  font-size: 0.95rem; color: var(--text-2);
-  line-height: 1.75; margin-bottom: 14px;
-}
+.legal-section h3 { font-size: 1rem; font-weight: 700; color: var(--text-1); margin-top: 20px; margin-bottom: 10px; }
+.legal-section p { font-size: 0.95rem; color: var(--text-2); line-height: 1.75; margin-bottom: 14px; }
 .legal-section p strong { color: var(--text-1); font-weight: 600; }
-.legal-section a {
-  color: var(--blue); font-weight: 500;
-  border-bottom: 1px solid rgba(30,111,255,0.3);
-  transition: border-color 0.2s;
-}
+.legal-section a { color: var(--blue); font-weight: 500; border-bottom: 1px solid rgba(30,111,255,0.3); transition: border-color 0.2s; }
 .legal-section a:hover { border-color: var(--blue); }
-
-.legal-section ul {
-  list-style: none; padding: 0; margin: 0 0 14px 0;
-  display: flex; flex-direction: column; gap: 10px;
-}
-.legal-section ul li {
-  position: relative; padding-left: 22px;
-  font-size: 0.93rem; color: var(--text-2); line-height: 1.7;
-}
-.legal-section ul li::before {
-  content: ''; position: absolute; left: 6px; top: 11px;
-  width: 6px; height: 6px; border-radius: 50%;
-  background: var(--blue); opacity: 0.5;
-}
+.legal-section ul { list-style: none; padding: 0; margin: 0 0 14px 0; display: flex; flex-direction: column; gap: 10px; }
+.legal-section ul li { position: relative; padding-left: 22px; font-size: 0.93rem; color: var(--text-2); line-height: 1.7; }
+.legal-section ul li::before { content: ''; position: absolute; left: 6px; top: 11px; width: 6px; height: 6px; border-radius: 50%; background: var(--blue); opacity: 0.5; }
 .legal-section ul li strong { color: var(--text-1); font-weight: 600; }
-
-.legal-callout {
-  background: var(--surface-blue); border-left: 3px solid var(--blue);
-  border-radius: 0 10px 10px 0; padding: 16px 20px; margin: 16px 0;
-}
+.legal-callout { background: var(--surface-blue); border-left: 3px solid var(--blue); border-radius: 0 10px 10px 0; padding: 16px 20px; margin: 16px 0; }
 .legal-callout p { margin: 0; font-size: 0.9rem; color: var(--text-2); }
 
-/* CONTACT */
-.contact-block {
-  background: var(--bg-card); border: 1px solid var(--border);
-  border-radius: 14px; padding: 28px 32px; margin-top: 64px;
-}
-.contact-block h3 {
-  font-family: 'Fraunces', serif; font-size: 1.1rem; font-weight: 700;
-  color: var(--gold); margin-bottom: 12px;
-}
-.contact-block p {
-  font-size: 0.9rem; color: var(--text-2); line-height: 1.7;
-  margin-bottom: 8px;
-}
+/* CONTACT BLOCK */
+.contact-block { background: var(--bg-card); border: 1px solid var(--border); border-radius: 14px; padding: 28px 32px; margin-top: 64px; }
+.contact-block h3 { font-family: 'Fraunces', serif; font-size: 1.1rem; font-weight: 700; color: var(--gold); margin-bottom: 12px; }
+.contact-block p { font-size: 0.9rem; color: var(--text-2); line-height: 1.7; margin-bottom: 8px; }
 .contact-block p:last-child { margin-bottom: 0; }
-.contact-block a {
-  color: var(--text-1); font-weight: 600;
-  border-bottom: 1px solid var(--border);
-  transition: color 0.2s, border-color 0.2s;
-}
+.contact-block a { color: var(--text-1); font-weight: 600; border-bottom: 1px solid var(--border); transition: color 0.2s, border-color 0.2s; }
 .contact-block a:hover { color: var(--blue); border-color: var(--blue); }
 
 /* FOOTER */
 footer {
-  border-top: 1px solid var(--border);
-  padding: 40px; max-width: 1060px; margin: 0 auto;
-  display: flex; justify-content: space-between; align-items: center;
-  flex-wrap: wrap; gap: 12px;
+  border-top: 1px solid var(--border); padding: 40px; max-width: 1060px; margin: 0 auto;
+  display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 12px;
 }
 .footer-logo { font-family: 'Fraunces', serif; font-size: 1.3rem; font-weight: 700; color: var(--text-1); }
 .footer-logo em { font-style: normal; color: var(--gold); }
-.footer-links {
-  display: flex; gap: 20px; flex-wrap: wrap;
-  font-size: 0.82rem; color: var(--text-2);
-}
+.footer-links { display: flex; gap: 20px; flex-wrap: wrap; font-size: 0.82rem; color: var(--text-2); }
 .footer-links a { transition: color 0.2s; }
 .footer-links a:hover { color: var(--blue); }
-.footer-meta {
-  font-size: 0.8rem; color: var(--text-3);
-  line-height: 1.6; text-align: right;
-}
+.footer-meta { font-size: 0.8rem; color: var(--text-3); line-height: 1.6; text-align: right; }
 .footer-meta a { color: var(--text-2); transition: color 0.2s; }
 .footer-meta a:hover { color: var(--blue); }
 
 @media (max-width: 640px) {
-  nav { padding: 0 20px; }
+  .site-nav { padding: 0 20px; }
   .legal-wrap { padding: 110px 20px 60px; }
   footer { padding: 32px 20px; flex-direction: column; align-items: flex-start; text-align: left; }
   .footer-meta { text-align: left; }
@@ -249,8 +171,8 @@ footer {
 </head>
 <body>
 
-<!-- NAV -->
-<nav>
+<!-- SITE NAV — using .site-nav class to avoid conflicting with <nav> TOC -->
+<header class="site-nav">
   <a href="/" class="nav-logo">dist<em>lo</em></a>
   <div class="nav-right">
     <button class="theme-toggle" onclick="toggleTheme()" aria-label="Toggle theme">
@@ -259,7 +181,7 @@ footer {
     </button>
     <a href="/#contact" class="nav-cta">Get Free Sample →</a>
   </div>
-</nav>
+</header>
 
 <!-- LEGAL CONTENT -->
 <main class="legal-wrap">
@@ -268,10 +190,10 @@ footer {
   <p class="legal-meta">distlo.in &middot; Operated by Dinesh Pushpan, sole proprietor &middot; Mumbai, India</p>
   <p class="legal-effective"><strong>Effective date:</strong> 3 May 2026 &middot; <strong>Last updated:</strong> 3 May 2026</p>
 
-  <!-- TOC -->
-  <nav class="toc" aria-label="Sections">
+  <!-- TOC — using div.toc-block, not <nav>, to avoid fixed-position inheritance -->
+  <div class="toc-block">
     <div class="toc-title">On this page</div>
-    <ol>
+    <ol class="toc-list">
       <li><a href="#scope">Who this policy applies to</a></li>
       <li><a href="#what-we-collect">What we collect</a></li>
       <li><a href="#why-we-collect">Why we collect it</a></li>
@@ -287,9 +209,8 @@ footer {
       <li><a href="#changes">Changes to this policy</a></li>
       <li><a href="#contact-us">Contact</a></li>
     </ol>
-  </nav>
+  </div>
 
-  <!-- 1 -->
   <section class="legal-section" id="scope">
     <h2><span class="num">01</span> Who this policy applies to</h2>
     <p>This Privacy Policy applies to <strong>Distlo</strong>, a content repurposing service operated as a sole proprietorship by <strong>Dinesh Pushpan</strong>, based in Mumbai, India. Distlo is the data controller for personal data described in this policy.</p>
@@ -304,7 +225,6 @@ footer {
     <p>If you do not agree with how we handle data as described here, please do not submit information to us or engage our service.</p>
   </section>
 
-  <!-- 2 -->
   <section class="legal-section" id="what-we-collect">
     <h2><span class="num">02</span> What we collect</h2>
     <h3>Information you give us directly</h3>
@@ -324,7 +244,6 @@ footer {
     <p>We do not run analytics scripts, advertising trackers, or behavioural profiling tools on distlo.in. We do not maintain a marketing pixel, retargeting list, or third-party advertising audience. We do not collect payment card numbers ourselves — these are handled directly by our payment processor.</p>
   </section>
 
-  <!-- 3 -->
   <section class="legal-section" id="why-we-collect">
     <h2><span class="num">03</span> Why we collect it</h2>
     <p>We collect personal data only for purposes that are necessary, specific, and connected to operating the service. Specifically:</p>
@@ -338,7 +257,6 @@ footer {
     </ul>
   </section>
 
-  <!-- 4 -->
   <section class="legal-section" id="legal-basis">
     <h2><span class="num">04</span> Legal basis for processing</h2>
     <p>For visitors and clients in jurisdictions where a legal basis must be specified (for example under the EU/UK GDPR, although Europe is not a current target market):</p>
@@ -351,7 +269,6 @@ footer {
     <p>For Indian residents, processing is conducted in line with the <strong>Digital Personal Data Protection Act, 2023 (DPDPA)</strong>. The principal purpose of processing is to deliver the contracted service. Notice of these purposes is provided through this policy.</p>
   </section>
 
-  <!-- 5 -->
   <section class="legal-section" id="how-we-use">
     <h2><span class="num">05</span> How we use your data</h2>
     <h3>Generating your content pack</h3>
@@ -362,7 +279,6 @@ footer {
     <p>We do not run automated marketing campaigns or send promotional newsletters. If you have engaged Distlo previously, we may contact you directly about relevant updates to your order or service. You can opt out of any non-transactional contact by replying to the relevant email.</p>
   </section>
 
-  <!-- 6 -->
   <section class="legal-section" id="sharing">
     <h2><span class="num">06</span> Who we share data with</h2>
     <p>We share personal data only with the following categories of third parties, and only to the extent necessary for them to perform their function:</p>
@@ -380,7 +296,6 @@ footer {
     <p>We do not sell, rent, or trade personal data to anyone, ever. We do not share data with marketing networks, ad platforms, or data brokers.</p>
   </section>
 
-  <!-- 7 -->
   <section class="legal-section" id="retention">
     <h2><span class="num">07</span> How long we keep data</h2>
     <p>Distlo applies a tiered retention policy:</p>
@@ -395,7 +310,6 @@ footer {
     <p>You may request earlier deletion of your raw input by emailing <a href="mailto:hello@distlo.in">hello@distlo.in</a> with your order ID. Requests are processed within 7 working days.</p>
   </section>
 
-  <!-- 8 -->
   <section class="legal-section" id="security">
     <h2><span class="num">08</span> How we secure data</h2>
     <p>We apply the following baseline practices:</p>
@@ -410,7 +324,6 @@ footer {
     <p>No system is perfectly secure. If we become aware of a security incident affecting your personal data, we will notify you and any required authorities without undue delay, in line with applicable law.</p>
   </section>
 
-  <!-- 9 -->
   <section class="legal-section" id="your-rights">
     <h2><span class="num">09</span> Your rights</h2>
     <h3>Rights for all users</h3>
@@ -429,7 +342,6 @@ footer {
     <p>Email <a href="mailto:legal@distlo.in">legal@distlo.in</a> with the subject line <em>"Privacy Request — [type of request]"</em>. We will respond within 30 days. We may need to verify your identity before processing certain requests.</p>
   </section>
 
-  <!-- 10 -->
   <section class="legal-section" id="international">
     <h2><span class="num">10</span> International transfers</h2>
     <p>Distlo is based in India. If you are located outside India and engage with us, your personal data is transferred to and processed in India.</p>
@@ -444,7 +356,6 @@ footer {
     <p>By engaging Distlo from a non-Indian jurisdiction, you understand and consent to your data being transferred internationally for the purposes described in this policy.</p>
   </section>
 
-  <!-- 11 -->
   <section class="legal-section" id="cookies">
     <h2><span class="num">11</span> Cookies and tracking</h2>
     <p>distlo.in does not currently set tracking cookies, advertising pixels, or behavioural analytics scripts.</p>
@@ -452,20 +363,17 @@ footer {
     <p>Currency detection on the pricing section is performed at page load via a single API call to a third-party geolocation service (ipapi.co). The country code returned is used solely to display prices in the appropriate currency and is not stored.</p>
   </section>
 
-  <!-- 12 -->
   <section class="legal-section" id="children">
     <h2><span class="num">12</span> Children's data</h2>
     <p>Distlo's services are intended for business use by professionals aged 18 or older. We do not knowingly collect personal data from anyone under 18. If you believe a minor has submitted personal data to us, please contact <a href="mailto:legal@distlo.in">legal@distlo.in</a> and we will delete it promptly.</p>
   </section>
 
-  <!-- 13 -->
   <section class="legal-section" id="changes">
     <h2><span class="num">13</span> Changes to this policy</h2>
     <p>We may update this policy from time to time. The effective date at the top of the page reflects the date of the most recent material change. Where changes materially affect how we handle your data, we will notify active clients by email and post a notice on the website.</p>
     <p>Continuing to use Distlo's services after a change indicates your acceptance of the updated policy.</p>
   </section>
 
-  <!-- 14 -->
   <section class="legal-section" id="contact-us">
     <h2><span class="num">14</span> Contact</h2>
     <p>For any privacy-related question, request, or concern:</p>
@@ -483,7 +391,6 @@ footer {
   </div>
 </main>
 
-<!-- FOOTER -->
 <footer>
   <div class="footer-logo">dist<em>lo</em></div>
   <div class="footer-links">
@@ -498,17 +405,12 @@ footer {
 <script>
   function toggleTheme() {
     const html = document.documentElement;
-    const current = html.getAttribute('data-theme');
-    html.setAttribute('data-theme', current === 'dark' ? 'light' : 'dark');
+    html.setAttribute('data-theme', html.getAttribute('data-theme') === 'dark' ? 'light' : 'dark');
     localStorage.setItem('distlo-theme', html.getAttribute('data-theme'));
   }
   const saved = localStorage.getItem('distlo-theme');
   if (saved) document.documentElement.setAttribute('data-theme', saved);
-  if (!saved) {
-    const preferLight = window.matchMedia('(prefers-color-scheme: light)').matches;
-    if (preferLight) document.documentElement.setAttribute('data-theme', 'light');
-  }
+  else if (window.matchMedia('(prefers-color-scheme: light)').matches) document.documentElement.setAttribute('data-theme', 'light');
 </script>
-
 </body>
 </html>

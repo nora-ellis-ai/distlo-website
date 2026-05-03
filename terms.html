@@ -11,36 +11,21 @@
 
 <style>
 :root {
-  --navy: #0A1628;
-  --blue: #1E6FFF;
-  --blue-hover: #1458D4;
-  --gold: #C9A84C;
-  --gold-light: #E5C76B;
-  --bg: #080F1E;
-  --bg-2: #0E1A2F;
-  --bg-card: rgba(255,255,255,0.04);
-  --bg-card-hover: rgba(255,255,255,0.07);
-  --border: rgba(255,255,255,0.08);
-  --border-blue: rgba(30,111,255,0.25);
-  --text-1: #F0F4FF;
-  --text-2: #8A9FCC;
-  --text-3: #5A6E96;
-  --surface-blue: rgba(30,111,255,0.08);
-  --surface-gold: rgba(201,168,76,0.1);
+  --navy: #0A1628; --blue: #1E6FFF; --blue-hover: #1458D4;
+  --gold: #C9A84C; --gold-light: #E5C76B;
+  --bg: #080F1E; --bg-2: #0E1A2F;
+  --bg-card: rgba(255,255,255,0.04); --bg-card-hover: rgba(255,255,255,0.07);
+  --border: rgba(255,255,255,0.08); --border-blue: rgba(30,111,255,0.25);
+  --text-1: #F0F4FF; --text-2: #8A9FCC; --text-3: #5A6E96;
+  --surface-blue: rgba(30,111,255,0.08); --surface-gold: rgba(201,168,76,0.1);
   --shadow: rgba(0,0,0,0.4);
 }
 [data-theme="light"] {
-  --bg: #F5F7FD;
-  --bg-2: #EAEEF8;
-  --bg-card: #FFFFFF;
-  --bg-card-hover: #F8FAFF;
-  --border: rgba(10,22,40,0.1);
-  --border-blue: rgba(30,111,255,0.2);
-  --text-1: #0A1628;
-  --text-2: #4A5E82;
-  --text-3: #8A9FCC;
-  --surface-blue: rgba(30,111,255,0.06);
-  --surface-gold: rgba(201,168,76,0.08);
+  --bg: #F5F7FD; --bg-2: #EAEEF8;
+  --bg-card: #FFFFFF; --bg-card-hover: #F8FAFF;
+  --border: rgba(10,22,40,0.1); --border-blue: rgba(30,111,255,0.2);
+  --text-1: #0A1628; --text-2: #4A5E82; --text-3: #8A9FCC;
+  --surface-blue: rgba(30,111,255,0.06); --surface-gold: rgba(201,168,76,0.08);
   --shadow: rgba(10,22,40,0.12);
 }
 
@@ -49,8 +34,8 @@ html { scroll-behavior: smooth; font-size: 16px; }
 body { font-family: 'Plus Jakarta Sans', system-ui, sans-serif; background: var(--bg); color: var(--text-1); transition: background 0.3s, color 0.3s; -webkit-font-smoothing: antialiased; }
 a { text-decoration: none; color: inherit; }
 
-/* NAV */
-nav {
+/* SITE NAV — scoped to header.site-nav */
+.site-nav {
   position: fixed; top: 0; left: 0; right: 0; z-index: 200;
   display: flex; align-items: center; justify-content: space-between;
   padding: 0 40px; height: 64px;
@@ -58,7 +43,7 @@ nav {
   border-bottom: 1px solid var(--border);
   transition: background 0.3s, border-color 0.3s;
 }
-[data-theme="light"] nav { background: rgba(245,247,253,0.88); }
+[data-theme="light"] .site-nav { background: rgba(245,247,253,0.88); }
 .nav-logo { font-family: 'Fraunces', serif; font-weight: 700; font-size: 1.5rem; letter-spacing: -0.02em; color: var(--text-1); }
 .nav-logo em { font-style: normal; color: var(--gold); }
 .nav-right { display: flex; align-items: center; gap: 16px; }
@@ -69,26 +54,18 @@ nav {
   font-size: 1rem; transition: background 0.2s, border-color 0.2s;
 }
 .theme-toggle:hover { background: var(--bg-card-hover); border-color: var(--border-blue); }
-.sun-icon { display: none; }
-.moon-icon { display: block; }
-[data-theme="light"] .sun-icon { display: block; }
-[data-theme="light"] .moon-icon { display: none; }
+.sun-icon { display: none; } .moon-icon { display: block; }
+[data-theme="light"] .sun-icon { display: block; } [data-theme="light"] .moon-icon { display: none; }
 .nav-cta {
-  display: flex; align-items: center; gap: 6px;
-  background: var(--blue); color: #fff;
-  padding: 9px 22px; border-radius: 8px;
-  font-size: 0.875rem; font-weight: 600;
+  display: inline-flex; align-items: center; gap: 6px;
+  background: var(--blue); color: #fff; padding: 9px 22px; border-radius: 8px;
+  font-size: 0.875rem; font-weight: 600; white-space: nowrap;
   transition: background 0.2s, transform 0.2s, box-shadow 0.2s;
-  white-space: nowrap;
 }
 .nav-cta:hover { background: var(--blue-hover); transform: translateY(-1px); box-shadow: 0 6px 20px rgba(30,111,255,0.35); }
 
 /* PAGE LAYOUT */
-.legal-wrap {
-  max-width: 760px;
-  margin: 0 auto;
-  padding: 140px 40px 80px;
-}
+.legal-wrap { max-width: 760px; margin: 0 auto; padding: 140px 40px 80px; }
 
 .legal-eyebrow {
   display: inline-flex; align-items: center; gap: 7px;
@@ -97,66 +74,70 @@ nav {
   letter-spacing: 0.1em; text-transform: uppercase;
   padding: 5px 14px; border-radius: 100px; margin-bottom: 24px;
 }
-.eyebrow-dot {
-  width: 5px; height: 5px; border-radius: 50%;
-  background: var(--gold); animation: blink 2s infinite;
-}
+.eyebrow-dot { width: 5px; height: 5px; border-radius: 50%; background: var(--gold); animation: blink 2s infinite; }
 @keyframes blink { 0%,100%{opacity:1} 50%{opacity:0.2} }
 
 .legal-title {
   font-family: 'Fraunces', serif; font-weight: 700;
   font-size: clamp(2rem, 4vw, 3rem); line-height: 1.12;
-  letter-spacing: -0.025em; color: var(--text-1);
-  margin-bottom: 16px;
+  letter-spacing: -0.025em; color: var(--text-1); margin-bottom: 16px;
 }
 .legal-title .accent { color: var(--blue); font-style: italic; }
 
 .legal-meta {
   font-size: 0.85rem; color: var(--text-3);
-  margin-bottom: 48px; padding-bottom: 24px;
-  border-bottom: 1px solid var(--border);
+  margin-bottom: 48px; padding-bottom: 24px; border-bottom: 1px solid var(--border);
 }
 
+/* PLACEHOLDER CARD */
 .placeholder-card {
   background: var(--surface-blue); border: 1px solid var(--border-blue);
-  border-radius: 16px; padding: 40px 32px;
-  margin-bottom: 40px;
+  border-radius: 16px; padding: 40px 32px; margin-bottom: 40px;
 }
 .placeholder-card h2 {
   font-family: 'Fraunces', serif; font-size: 1.4rem; font-weight: 700;
   color: var(--text-1); margin-bottom: 16px;
 }
-.placeholder-card p {
-  font-size: 0.95rem; color: var(--text-2);
-  line-height: 1.7; margin-bottom: 16px;
-}
+.placeholder-card p { font-size: 0.95rem; color: var(--text-2); line-height: 1.7; margin-bottom: 16px; }
 .placeholder-card p:last-child { margin-bottom: 0; }
-.placeholder-card a {
-  color: var(--blue); font-weight: 600;
-  border-bottom: 1px solid rgba(30,111,255,0.4);
-  transition: border-color 0.2s;
-}
+.placeholder-card a { color: var(--blue); font-weight: 600; border-bottom: 1px solid rgba(30,111,255,0.4); transition: border-color 0.2s; }
 .placeholder-card a:hover { border-color: var(--blue); }
 
+/* SUMMARY BLOCK */
 .summary-block { margin-bottom: 40px; }
 .summary-block h2 {
   font-family: 'Fraunces', serif; font-size: 1.4rem; font-weight: 700;
-  color: var(--text-1); margin-bottom: 20px;
+  color: var(--text-1); margin-bottom: 8px;
 }
+.summary-note {
+  font-size: 0.88rem; color: var(--text-3); font-style: italic;
+  margin-bottom: 24px; line-height: 1.6;
+}
+
+/* SUMMARY LIST — each row is a simple paragraph, no broken flex columns */
 .summary-list {
-  list-style: none; display: flex; flex-direction: column; gap: 14px;
+  list-style: none;
+  display: flex; flex-direction: column; gap: 0;
+  border: 1px solid var(--border); border-radius: 12px; overflow: hidden;
 }
 .summary-list li {
-  display: flex; align-items: flex-start; gap: 14px;
-  font-size: 0.95rem; color: var(--text-2); line-height: 1.65;
+  display: flex; align-items: flex-start; gap: 12px;
+  padding: 14px 18px;
+  border-bottom: 1px solid var(--border);
+  font-size: 0.92rem; line-height: 1.65; color: var(--text-2);
 }
-.summary-list li::before {
-  content: '✓';
-  color: var(--blue); font-weight: 700; font-size: 0.95rem;
+.summary-list li:last-child { border-bottom: none; }
+.summary-check {
   flex-shrink: 0; margin-top: 2px;
+  color: var(--blue); font-weight: 700; font-size: 0.85rem;
 }
-.summary-list strong { color: var(--text-1); font-weight: 600; }
+.summary-label {
+  flex-shrink: 0; min-width: 110px;
+  font-weight: 700; color: var(--text-1); font-size: 0.92rem;
+}
+.summary-text { flex: 1; }
 
+/* CONTACT */
 .contact-block {
   background: var(--bg-card); border: 1px solid var(--border);
   border-radius: 14px; padding: 28px 32px;
@@ -165,41 +146,28 @@ nav {
   font-family: 'Fraunces', serif; font-size: 1.1rem; font-weight: 700;
   color: var(--gold); margin-bottom: 12px;
 }
-.contact-block p {
-  font-size: 0.9rem; color: var(--text-2); line-height: 1.7;
-}
-.contact-block a {
-  color: var(--text-1); font-weight: 600;
-  border-bottom: 1px solid var(--border);
-  transition: color 0.2s, border-color 0.2s;
-}
+.contact-block p { font-size: 0.9rem; color: var(--text-2); line-height: 1.7; }
+.contact-block a { color: var(--text-1); font-weight: 600; border-bottom: 1px solid var(--border); transition: color 0.2s, border-color 0.2s; }
 .contact-block a:hover { color: var(--blue); border-color: var(--blue); }
 
 /* FOOTER */
 footer {
-  border-top: 1px solid var(--border);
-  padding: 40px; max-width: 1060px; margin: 0 auto;
-  display: flex; justify-content: space-between; align-items: center;
-  flex-wrap: wrap; gap: 12px;
+  border-top: 1px solid var(--border); padding: 40px; max-width: 1060px; margin: 0 auto;
+  display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 12px;
 }
 .footer-logo { font-family: 'Fraunces', serif; font-size: 1.3rem; font-weight: 700; color: var(--text-1); }
 .footer-logo em { font-style: normal; color: var(--gold); }
-.footer-links {
-  display: flex; gap: 20px; flex-wrap: wrap;
-  font-size: 0.82rem; color: var(--text-2);
-}
+.footer-links { display: flex; gap: 20px; flex-wrap: wrap; font-size: 0.82rem; color: var(--text-2); }
 .footer-links a { transition: color 0.2s; }
 .footer-links a:hover { color: var(--blue); }
-.footer-meta {
-  font-size: 0.8rem; color: var(--text-3);
-  line-height: 1.6; text-align: right;
-}
+.footer-meta { font-size: 0.8rem; color: var(--text-3); line-height: 1.6; text-align: right; }
 .footer-meta a { color: var(--text-2); transition: color 0.2s; }
 .footer-meta a:hover { color: var(--blue); }
 
 @media (max-width: 640px) {
-  nav { padding: 0 20px; }
+  .site-nav { padding: 0 20px; }
   .legal-wrap { padding: 110px 20px 60px; }
+  .summary-label { min-width: 90px; }
   footer { padding: 32px 20px; flex-direction: column; align-items: flex-start; text-align: left; }
   .footer-meta { text-align: left; }
 }
@@ -207,8 +175,7 @@ footer {
 </head>
 <body>
 
-<!-- NAV -->
-<nav>
+<header class="site-nav">
   <a href="/" class="nav-logo">dist<em>lo</em></a>
   <div class="nav-right">
     <button class="theme-toggle" onclick="toggleTheme()" aria-label="Toggle theme">
@@ -217,15 +184,13 @@ footer {
     </button>
     <a href="/#contact" class="nav-cta">Get Free Sample →</a>
   </div>
-</nav>
+</header>
 
-<!-- LEGAL CONTENT -->
 <main class="legal-wrap">
   <div class="legal-eyebrow"><span class="eyebrow-dot"></span>Legal · Terms of Service</div>
   <h1 class="legal-title">Terms of <span class="accent">Service</span></h1>
   <p class="legal-meta">distlo.in &middot; Operated by Dinesh Pushpan, sole proprietor &middot; Mumbai, India</p>
 
-  <!-- PLACEHOLDER NOTICE -->
   <div class="placeholder-card">
     <h2>Terms of Service — under legal review</h2>
     <p>Distlo's full Terms of Service are currently being finalised by external legal counsel. This page exists as a placeholder until that review is complete.</p>
@@ -233,31 +198,64 @@ footer {
     <p>If you would like to review the current client agreement before signing, email <a href="mailto:hello@distlo.in">hello@distlo.in</a> with the subject line <em>"Client Agreement Request"</em>. We will share the current version within one working day.</p>
   </div>
 
-  <!-- SUMMARY OF KEY TERMS -->
   <div class="summary-block">
     <h2>Summary of how Distlo works</h2>
-    <p style="font-size: 0.9rem; color: var(--text-3); margin-bottom: 24px; font-style: italic;">This summary is not a substitute for the signed client agreement. It exists to set expectations clearly before any engagement.</p>
+    <p class="summary-note">This summary is not a substitute for the signed client agreement. It exists to set expectations clearly before any engagement.</p>
     <ul class="summary-list">
-      <li><strong>Scope.</strong> Each pack delivers 5 LinkedIn posts, 10 hooks, 3 CTAs, and 1 Canva carousel concept, generated using the SIGNAL Framework from one raw input you submit.</li>
-      <li><strong>Payment.</strong> 100% upfront. Work begins after payment is confirmed and the brief is accepted in writing.</li>
-      <li><strong>Delivery.</strong> 3 working days from brief acceptance. Working days are Monday to Friday, IST, excluding Indian public holidays.</li>
-      <li><strong>Revisions.</strong> One revision round included per pack. Revision requests must be submitted within 14 days of delivery.</li>
-      <li><strong>Cancellation.</strong> No cash refund after payment. A 60-day credit equal to the order value is issued under defined cancellation scenarios.</li>
-      <li><strong>Async only.</strong> The service is fully asynchronous. No calls, no meetings, no live sessions are offered.</li>
-      <li><strong>Ownership.</strong> All delivered content becomes your property after full payment. The SIGNAL Framework itself remains proprietary to Distlo.</li>
-      <li><strong>Liability.</strong> Distlo's maximum liability for any claim is capped at the amount paid for the specific order in dispute.</li>
-      <li><strong>Governing law.</strong> Indian law. Disputes are resolved through good-faith negotiation followed by arbitration in Mumbai if required.</li>
+      <li>
+        <span class="summary-check">✓</span>
+        <span class="summary-label">Scope.</span>
+        <span class="summary-text">Each pack delivers 5 LinkedIn posts, 10 hooks, 3 CTAs, and 1 Canva carousel concept, generated using the SIGNAL Framework from one raw input you submit.</span>
+      </li>
+      <li>
+        <span class="summary-check">✓</span>
+        <span class="summary-label">Payment.</span>
+        <span class="summary-text">100% upfront. Work begins after payment is confirmed and the brief is accepted in writing.</span>
+      </li>
+      <li>
+        <span class="summary-check">✓</span>
+        <span class="summary-label">Delivery.</span>
+        <span class="summary-text">3 working days from brief acceptance. Working days are Monday to Friday, IST, excluding Indian public holidays.</span>
+      </li>
+      <li>
+        <span class="summary-check">✓</span>
+        <span class="summary-label">Revisions.</span>
+        <span class="summary-text">One revision round included per pack. Revision requests must be submitted within 14 days of delivery.</span>
+      </li>
+      <li>
+        <span class="summary-check">✓</span>
+        <span class="summary-label">Cancellation.</span>
+        <span class="summary-text">No cash refund after payment. A 60-day credit equal to the order value is issued under defined cancellation scenarios.</span>
+      </li>
+      <li>
+        <span class="summary-check">✓</span>
+        <span class="summary-label">Async only.</span>
+        <span class="summary-text">The service is fully asynchronous. No calls, no meetings, no live sessions are offered.</span>
+      </li>
+      <li>
+        <span class="summary-check">✓</span>
+        <span class="summary-label">Ownership.</span>
+        <span class="summary-text">All delivered content becomes your property after full payment. The SIGNAL Framework itself remains proprietary to Distlo.</span>
+      </li>
+      <li>
+        <span class="summary-check">✓</span>
+        <span class="summary-label">Liability.</span>
+        <span class="summary-text">Distlo's maximum liability for any claim is capped at the amount paid for the specific order in dispute.</span>
+      </li>
+      <li>
+        <span class="summary-check">✓</span>
+        <span class="summary-label">Governing law.</span>
+        <span class="summary-text">Indian law. Disputes are resolved through good-faith negotiation followed by arbitration in Mumbai if required.</span>
+      </li>
     </ul>
   </div>
 
-  <!-- CONTACT -->
   <div class="contact-block">
     <h3>Questions about Distlo's terms?</h3>
     <p>Email <a href="mailto:hello@distlo.in">hello@distlo.in</a> for general queries, or <a href="mailto:legal@distlo.in">legal@distlo.in</a> for formal notices. Both inboxes respond within one working day.</p>
   </div>
 </main>
 
-<!-- FOOTER -->
 <footer>
   <div class="footer-logo">dist<em>lo</em></div>
   <div class="footer-links">
@@ -272,17 +270,12 @@ footer {
 <script>
   function toggleTheme() {
     const html = document.documentElement;
-    const current = html.getAttribute('data-theme');
-    html.setAttribute('data-theme', current === 'dark' ? 'light' : 'dark');
+    html.setAttribute('data-theme', html.getAttribute('data-theme') === 'dark' ? 'light' : 'dark');
     localStorage.setItem('distlo-theme', html.getAttribute('data-theme'));
   }
   const saved = localStorage.getItem('distlo-theme');
   if (saved) document.documentElement.setAttribute('data-theme', saved);
-  if (!saved) {
-    const preferLight = window.matchMedia('(prefers-color-scheme: light)').matches;
-    if (preferLight) document.documentElement.setAttribute('data-theme', 'light');
-  }
+  else if (window.matchMedia('(prefers-color-scheme: light)').matches) document.documentElement.setAttribute('data-theme', 'light');
 </script>
-
 </body>
 </html>
