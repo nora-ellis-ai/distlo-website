@@ -115,7 +115,7 @@ nav {
 }
 .legal-effective strong { color: var(--text-1); }
 
-/* TOC */
+/* TOC — single column, no overflow */
 .toc {
   background: var(--bg-card); border: 1px solid var(--border);
   border-radius: 14px; padding: 24px 28px; margin-bottom: 56px;
@@ -126,7 +126,7 @@ nav {
 }
 .toc ol {
   list-style: none; counter-reset: toc-counter;
-  display: grid; grid-template-columns: 1fr 1fr; gap: 8px 24px;
+  display: flex; flex-direction: column; gap: 8px;
 }
 .toc ol li {
   counter-increment: toc-counter;
@@ -142,7 +142,6 @@ nav {
 }
 .toc ol li a { transition: color 0.2s; }
 .toc ol li a:hover { color: var(--blue); }
-@media (max-width: 600px) { .toc ol { grid-template-columns: 1fr; } }
 
 /* SECTIONS */
 .legal-section {
@@ -308,7 +307,6 @@ footer {
   <!-- 2 -->
   <section class="legal-section" id="what-we-collect">
     <h2><span class="num">02</span> What we collect</h2>
-
     <h3>Information you give us directly</h3>
     <ul>
       <li><strong>Contact details:</strong> name, email address, professional role, company name</li>
@@ -317,13 +315,11 @@ footer {
       <li><strong>Raw input for content production:</strong> the video, voice note, transcript, or written paragraph you submit for processing</li>
       <li><strong>Communications:</strong> emails, LinkedIn messages, and any correspondence with us</li>
     </ul>
-
     <h3>Information collected automatically</h3>
     <ul>
       <li><strong>Approximate location:</strong> we detect the country your visit originates from to display prices in the appropriate currency. We do not store this information.</li>
       <li><strong>Standard server logs:</strong> our hosting provider (GitHub Pages) records standard request data including IP addresses and user-agent strings as part of normal web hosting operations.</li>
     </ul>
-
     <h3>What we do not collect</h3>
     <p>We do not run analytics scripts, advertising trackers, or behavioural profiling tools on distlo.in. We do not maintain a marketing pixel, retargeting list, or third-party advertising audience. We do not collect payment card numbers ourselves — these are handled directly by our payment processor.</p>
   </section>
@@ -358,13 +354,10 @@ footer {
   <!-- 5 -->
   <section class="legal-section" id="how-we-use">
     <h2><span class="num">05</span> How we use your data</h2>
-
     <h3>Generating your content pack</h3>
     <p>When you submit a raw input for processing, that input is run through Distlo's SIGNAL Framework to produce the deliverables described in your order. This involves AI-assisted analysis. The framework is operated under the direct supervision of Distlo. Generated outputs are reviewed before delivery.</p>
-
     <h3>AI sub-processors</h3>
     <p>Distlo uses commercial AI tools to assist content generation, including services from <strong>Anthropic</strong> (Claude) and <strong>Google</strong> (Gemini). These tools are configured for business use and processing happens on enterprise terms that prohibit the use of customer content for model training. Your raw input may be transmitted to these sub-processors for the sole purpose of generating your deliverables.</p>
-
     <h3>Direct marketing</h3>
     <p>We do not run automated marketing campaigns or send promotional newsletters. If you have engaged Distlo previously, we may contact you directly about relevant updates to your order or service. You can opt out of any non-transactional contact by replying to the relevant email.</p>
   </section>
@@ -420,7 +413,6 @@ footer {
   <!-- 9 -->
   <section class="legal-section" id="your-rights">
     <h2><span class="num">09</span> Your rights</h2>
-
     <h3>Rights for all users</h3>
     <ul>
       <li><strong>Access:</strong> request a copy of personal data we hold about you</li>
@@ -429,13 +421,10 @@ footer {
       <li><strong>Withdraw consent:</strong> for any processing based on your consent</li>
       <li><strong>Object:</strong> to specific uses of your data, including cold outreach</li>
     </ul>
-
     <h3>For Indian residents (DPDPA, 2023)</h3>
     <p>Indian residents may also nominate another individual to exercise their rights in the event of incapacity or death, and have the right to lodge a complaint with the Data Protection Board of India.</p>
-
     <h3>For UK and EU residents (UK/EU GDPR, where applicable)</h3>
     <p>Although Distlo does not currently target the European Union, residents of the UK or EU who interact with us also have the right to data portability and the right to lodge a complaint with their local supervisory authority (in the UK, the Information Commissioner's Office).</p>
-
     <h3>How to exercise your rights</h3>
     <p>Email <a href="mailto:legal@distlo.in">legal@distlo.in</a> with the subject line <em>"Privacy Request — [type of request]"</em>. We will respond within 30 days. We may need to verify your identity before processing certain requests.</p>
   </section>
@@ -488,7 +477,6 @@ footer {
     </div>
   </section>
 
-  <!-- CONTACT BLOCK -->
   <div class="contact-block">
     <h3>Need help with something specific?</h3>
     <p>If you would like a copy of your data, want a deletion processed, or have any concern about how Distlo handles your information — email <a href="mailto:legal@distlo.in">legal@distlo.in</a>. We respond within one working day for general queries and within 30 days for formal data requests.</p>
