@@ -44,25 +44,26 @@ Sections in order:
 
 Visitor country is detected via `ipapi.co/json` (free tier, 1000 req/day, no API key required).
 
-Pricing updates automatically on page load for 5 elements:
+Pricing updates automatically on page load for 6 elements:
 - Hero CTA button text
 - Pricing card: Starter
 - Pricing card: Standard
 - Pricing card: Monthly Retainer
 - Form dropdown options (Starter / Standard / Retainer)
 - Currency badge (shown for non-India visitors only)
+- "Incl. GST" tag next to each India price (hidden for all other countries, since international pricing is zero-rated under LUT)
 
 **Currency map:**
 
 | Country | Starter | Standard | Retainer |
 |---------|---------|----------|----------|
-| India (IN) | ₹2,999 | ₹4,999 | ₹20K+ |
-| UAE (AE) | AED 199 | AED 349 | AED 1,299/mo |
-| Singapore (SG) | SGD 79 | SGD 129 | SGD 499/mo |
-| UK (GB) | £49 | £79 | £299/mo |
-| All others | $49 | $79 | $299/mo |
+| India (IN) | ₹3,539 (incl. GST) | ₹5,899 (incl. GST) | ₹23,600/mo (incl. GST) |
+| UAE (AE) | AED 349 | AED 599 | AED 2,499/mo |
+| Singapore (SG) | SGD 149 | SGD 249 | SGD 999/mo |
+| UK (GB) | £79 | £135 | £475/mo |
+| All others | $99 | $169 | $599/mo |
 
-India visitors see no change. Badge is hidden for India, visible for all other countries.
+India pricing is GST-inclusive (18%) since Distlo charges GST on domestic invoices. International pricing is zero-rated under LUT (Letter of Undertaking), so no GST is applied. Badge is hidden for India, visible for all other countries.
 
 To add a new country, add one entry to the `PRICING` object in the `<script>` block at the bottom of `index.html`:
 
@@ -153,8 +154,9 @@ Remove [element] — short description
 | HTTPS | ✅ |
 | Formspree active | ✅ |
 | Geo pricing | ✅ Live (April 2026) |
+| GST-inclusive India pricing | ✅ Live (June 2026) |
 | Google Search Console | ✅ Indexed |
-| Razorpay payment link | Pending activation |
+| Razorpay payment link | Pending activation. Update to GST-inclusive amounts (₹3,539 / ₹5,899) |
 | Onboarding form | Build on first client |
 
 ---
